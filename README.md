@@ -24,6 +24,23 @@ npm start -- --listen 4173
 
 Preview the exported site at http://localhost:4173. Deploy the contents of `out/` to any static host. Routes use directory indexes (`about/index.html`, `contact/index.html`, and `portfolio/index.html`); preserve those directories when deploying. The sitemap and robots file are generated during the build.
 
+## Cloudflare deployment
+
+Cloudflare Workers serves the static export using `wrangler.jsonc`. In the Git deployment setup, use:
+
+| Setting | Value |
+| --- | --- |
+| Project name | `b-parker-interiors` |
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Preview command | `npx wrangler preview` |
+| Root directory | Repository root (leave blank) |
+
+The configuration publishes `out/`, preserves directory-index routing, and serves the exported 404 page for missing routes. `.node-version` selects Node.js 24 for the build. Workers Builds supplies deployment authentication automatically.
+
+After building, check deployment configuration without publishing using `npx wrangler deploy --dry-run`, or preview Cloudflare's routing locally with `npx wrangler dev`.
+
 ## Images and fonts
 
 Source photos and logos live in `assets/images/` and are imported into page components. Use the `next-image-export-optimizer` Image component and a `sizes` value matching the image's displayed width when adding an image.
