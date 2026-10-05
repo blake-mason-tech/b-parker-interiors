@@ -1,7 +1,8 @@
 import { FADE_IN_TIME } from '@/constants/image.constants';
 import { FILL } from '@/constants/styles.constants';
 import { Box, Fade } from '@mui/material';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next-image-export-optimizer';
+import { StaticImageData } from 'next/image';
 
 interface SingleImageProps {
     image: StaticImageData;
@@ -37,7 +38,8 @@ export default function SingleImage({
             <Fade timeout={FADE_IN_TIME} in={fadeIn()}>
                 <Image
                     onLoad={onLoad}
-                    priority
+                    preload={index === 0}
+                    loading={index === 0 ? undefined : 'eager'}
                     style={{
                         width: '100%',
                         objectFit: 'cover',

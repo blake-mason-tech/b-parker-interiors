@@ -1,7 +1,7 @@
 import { COLORS } from '@/constants/colors.constants';
 import { theme } from '@/theme/theme';
 import { Box, CssBaseline } from '@mui/material';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import { Metadata } from 'next';
 import Navigation from './components/Navigation';

@@ -1,40 +1,47 @@
-import contactImage from '@/public/images/Contact Us Image.jpg';
-import { Box } from '@mui/material';
-import Image from 'next/image';
-import PageContainer from '../components/PageContainer';
-import { ContactFormProvider } from './ContactForm.context';
-import EmailForm from './components/ContactForm';
-import Script from 'next/script';
+import contactImage from '@/assets/images/contact-us-image.jpg';
+import { Box, Link, Typography } from '@mui/material';
+import type { Metadata } from 'next';
+import Image from 'next-image-export-optimizer';
+import styles from './contact.module.css';
+
+export const metadata: Metadata = {
+    title: 'Contact | B. Parker Interiors',
+    description: 'Get in touch with B. Parker Interiors about your home and interior design project.',
+};
+
+const email = 'bailey@bparkerinteriors.com';
 
 export default function Contact() {
     return (
-        <>
-            <Script src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`} />
-            <Box
-                sx={{
-                    flexGrow: 1,
-                    position: 'relative',
-                    display: 'flex',
-                    flexDirection: 'column',
-                }}
-            >
-                <Box sx={{ position: 'absolute', height: '100%', width: '100%' }}>
-                    <Image priority src={contactImage} alt="contact image" sizes="100vw" fill style={{ objectFit: 'cover' }} />
-                </Box>
-                <PageContainer
-                    sx={{
-                        position: 'relative',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        flexGrow: 1,
-                        alignItems: 'center',
-                    }}
+        <section className={styles.page} aria-labelledby="contact-title">
+            <div className={styles.introduction}>
+                <Typography variant="h1" id="contact-title" sx={{ mb: 2 }}>
+                    CONTACT US
+                </Typography>
+                <Typography className={styles.description}>
+                    Whether you’re building, remodeling, or making a space your own,
+                    we’d love to hear what you have in mind.
+                </Typography>
+                <Link
+                    className={styles.email}
+                    href={`mailto:${email}`}
+                    variant="body1"
+                    sx={{ fontWeight: 500, mt: 4, maxWidth: '100%', overflowWrap: 'anywhere' }}
                 >
-                    <ContactFormProvider>
-                        <EmailForm />
-                    </ContactFormProvider>
-                </PageContainer>
+                    {email}
+                </Link>
+            </div>
+            <Box className={styles.photograph} sx={{ border: 1, boxShadow: 1 }}>
+                <Image
+                    preload
+                    src={contactImage}
+                    alt="A light-filled bedroom with natural wood beams and layered neutral linens"
+                    sizes="(max-width: 800px) calc(100vw - 56px), calc(100vw - 48px)"
+                    fill
+                    placeholder="blur"
+                    style={{ objectFit: 'cover', objectPosition: '65% center' }}
+                />
             </Box>
-        </>
+        </section>
     );
 }

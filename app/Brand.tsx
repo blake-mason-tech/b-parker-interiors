@@ -1,7 +1,7 @@
-import { CENTER, FILL } from '@/constants/styles.constants';
+import { CENTER } from '@/constants/styles.constants';
 import { Box } from '@mui/material';
-import Image from 'next/image';
-import homeLogo from '@/public/images/Home Page Logo.png';
+import Image from 'next-image-export-optimizer';
+import homeLogo from '@/assets/images/home-page-logo.png';
 import { RESPONSIVE_IMAGE } from '@/constants/image.constants';
 
 export default function Brand() {
@@ -15,9 +15,10 @@ export default function Brand() {
             }}
         >
             <Image
-                priority
+                preload
                 alt="home logo"
                 src={homeLogo}
+                sizes="(max-width: 702px) calc(100vw - 64px), 638px"
                 style={{ ...RESPONSIVE_IMAGE, maxWidth: 638 }}
             />
         </Box>

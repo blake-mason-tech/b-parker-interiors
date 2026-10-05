@@ -3,7 +3,7 @@
 import { Cinzel, Outfit } from 'next/font/google';
 import { Theme, createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { COLORS } from '@/constants/colors.constants';
-import { CSSProperties } from '@mui/material/styles/createMixins';
+import type { CSSProperties } from 'react';
 
 export const outfit = Outfit({ subsets: ['latin'] });
 
@@ -77,10 +77,10 @@ class ThemeUtils {
     static createFonts() {
         for (const font of this.headerFonts) {
             const { fontSizes, tag, ...cssProperties } = font;
-            this.theme.typography[font.tag] = {
+            this.theme.typography[tag] = {
                 ...cssProperties,
                 [this.theme.breakpoints.down('md')]: {
-                    fontSize: font.fontSizes.small,
+                    fontSize: fontSizes.small,
                 },
             };
         }

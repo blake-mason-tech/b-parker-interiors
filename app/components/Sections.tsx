@@ -3,8 +3,8 @@ import { Fragment, ReactNode } from 'react';
 
 interface SectionsProps {
     data: {
-        title: JSX.Element;
-        body: JSX.Element;
+        title: ReactNode;
+        body: ReactNode;
     }[];
 }
 

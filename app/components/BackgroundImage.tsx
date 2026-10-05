@@ -7,10 +7,10 @@ import { useEffect, useRef, useState } from 'react';
 import SingleImage from './SingleImage';
 import { theme } from '@/theme/theme';
 
-import image1 from '@/public/images/home/Home Page 1.jpg';
-import image2 from '@/public/images/home/Home Page 2.jpg';
-import image3 from '@/public/images/home/Home Page 3.jpg';
-import image4 from '@/public/images/home/Home Page 4.jpg';
+import image1 from '@/assets/images/home/home-page-1.jpg';
+import image2 from '@/assets/images/home/home-page-2.jpg';
+import image3 from '@/assets/images/home/home-page-3.jpg';
+import image4 from '@/assets/images/home/home-page-4.jpg';
 
 const images = [image1, image2, image3, image4];
 

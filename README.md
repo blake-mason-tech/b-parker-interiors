@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# B. Parker Interiors
 
-## Getting Started
+A Next.js App Router site exported as static HTML, CSS, JavaScript, fonts, and images. Production hosting does not require a Next.js server, API, or environment secrets. The contact page opens the visitor's email app.
 
-First, run the development server:
+## Development
+
+Use Node.js 24 or newer, then run:
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The development site is available at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build and preview
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+npm run lint
+npm run typecheck
+npm run build
+npm start -- --listen 4173
+```
 
-## Learn More
+Preview the exported site at http://localhost:4173. Deploy the contents of `out/` to any static host. Routes use directory indexes (`about/index.html`, `contact/index.html`, and `portfolio/index.html`); preserve those directories when deploying. The sitemap and robots file are generated during the build.
 
-To learn more about Next.js, take a look at the following resources:
+## Images and fonts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Source photos and logos live in `assets/images/` and are imported into page components. Use the `next-image-export-optimizer` Image component and a `sizes` value matching the image's displayed width when adding an image.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+`npm run build` generates responsive WebP images and blur placeholders, then packages them in `out/nextImageExportOptimizer/`. Browsers select the appropriate width for their viewport and pixel density. Imported originals remain available as fallbacks; the source asset directory is not copied into `out/`. Generated image caches in `public/` are ignored by Git, so subsequent builds can reuse them.
 
-## Deploy on Vercel
+Cinzel and Outfit are downloaded by `next/font` during the build and served locally in the exported site. A fresh build needs network access to Google Fonts; visitors do not.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tooling compatibility
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Next.js, React, Material UI, and Emotion use current stable releases. ESLint stays on the latest v9 release because the plugins in `eslint-config-next` do not support v10 yet.
+
+Type checking uses TypeScript 7. The `typescript` package name points to the official TypeScript 6 compatibility package for tools that still require the compiler API, while `@typescript/native` supplies the TypeScript 7 `tsc` command. This follows [Microsoft's compatibility setup](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript-6-0).

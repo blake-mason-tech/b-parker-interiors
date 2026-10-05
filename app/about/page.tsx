@@ -1,9 +1,9 @@
 import { PAGES } from '@/constants/pages.constants';
-import image1 from '@/public/images/home/Home Page 3.jpg';
-import image2 from '@/public/images/TeamPhoto.jpg';
+import image1 from '@/assets/images/home/home-page-3.jpg';
+import image2 from '@/assets/images/TeamPhoto.jpg';
 import { Link, Typography } from '@mui/material';
-import Image from 'next/image';
-import NextLink from 'next/link';
+import Image from 'next-image-export-optimizer';
+import NextLink from '../components/NextLink';
 import Heading from '../components/Heading';
 import PageContainer from '../components/PageContainer';
 import ImageContainer from './ImageContainer';
@@ -27,7 +27,7 @@ export default function About() {
             <ImageContainer>
                 <Image
                     placeholder="blur"
-                    sizes="100vw"
+                    sizes="(max-width: 599px) calc(100vw - 32px), (max-width: 1199px) calc(100vw - 48px), 1152px"
                     style={{
                         width: '100%',
                         height: 'auto',
@@ -85,7 +85,7 @@ export default function About() {
                 <Image
                     placeholder="blur"
                     src={image2}
-                    sizes="100vw"
+                    sizes="(max-width: 599px) calc(100vw - 32px), (max-width: 1199px) calc(100vw - 48px), 1152px"
                     alt="team photo"
                     style={{
                         width: '100%',
