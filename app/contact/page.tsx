@@ -1,5 +1,5 @@
 import contactImage from '@/assets/images/contact-us-image.jpg';
-import { Box, Link, Typography } from '@mui/material';
+import { Link, Typography } from '@mui/material';
 import type { Metadata } from 'next';
 import Image from 'next-image-export-optimizer';
 import styles from './contact.module.css';
@@ -31,17 +31,17 @@ export default function Contact() {
                     {email}
                 </Link>
             </div>
-            <Box className={styles.photograph} sx={{ border: 1, boxShadow: 1 }}>
+            <div className={styles.photograph}>
                 <Image
                     preload
                     src={contactImage}
                     alt="A light-filled bedroom with natural wood beams and layered neutral linens"
-                    sizes="(max-width: 800px) calc(100vw - 56px), calc(100vw - 48px)"
+                    sizes="100vw"
                     fill
                     placeholder="blur"
                     style={{ objectFit: 'cover', objectPosition: '65% center' }}
                 />
-            </Box>
+            </div>
         </section>
     );
 }

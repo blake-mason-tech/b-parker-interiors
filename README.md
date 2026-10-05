@@ -34,8 +34,9 @@ Cloudflare Workers serves the static export using `wrangler.jsonc`. In the Git d
 | Production branch | `main` |
 | Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
-| Preview command | `npx wrangler preview` |
 | Root directory | Repository root (leave blank) |
+
+Only pushes to `main` trigger Cloudflare builds and deployments; automatic branch previews are disabled.
 
 The configuration publishes `out/`, preserves directory-index routing, and serves the exported 404 page for missing routes. `.node-version` selects Node.js 24 for the build. Workers Builds supplies deployment authentication automatically.
 

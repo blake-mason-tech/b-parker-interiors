@@ -62,7 +62,7 @@
         background: #53504b;
         color: #fff;
         border: 1px solid #d0cbc2;
-        box-shadow: 0 12px 32px rgb(0 0 0 / 28%), 0 3px 8px rgb(0 0 0 / 18%);
+        box-shadow: 0 24px 56px rgb(0 0 0 / 42%), 0 8px 18px rgb(0 0 0 / 26%);
     }
 
     .page .email {
@@ -81,7 +81,6 @@
         grid-area: 1 / 1;
         align-self: stretch;
         min-height: 0;
-        margin: 24px;
     }
 }
 
@@ -99,6 +98,5 @@
     .photograph {
         min-height: 0;
         aspect-ratio: 4 / 3;
-        margin: 0 28px 32px;
     }
 }
