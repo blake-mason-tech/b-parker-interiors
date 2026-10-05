@@ -26,19 +26,20 @@ Preview the exported site at http://localhost:4173. Deploy the contents of `out/
 
 ## Cloudflare deployment
 
-Cloudflare Workers serves the static export using `wrangler.jsonc`. In the Git deployment setup, use:
+Cloudflare Workers serves the static export using `wrangler.jsonc`. The GitHub Actions workflow in `.github/workflows/deploy.yml` controls automatic builds and deployments:
 
-| Setting | Value |
+| Branch | Publishes to |
 | --- | --- |
-| Project name | `b-parker-interiors` |
-| Production branch | `main` |
-| Build command | `npm run build` |
-| Deploy command | `npx wrangler deploy` |
-| Root directory | Repository root (leave blank) |
+| `main` | Live site and preview site |
+| `preview` | Preview site only |
 
-Only pushes to `main` trigger Cloudflare builds and deployments; automatic branch previews are disabled.
+Pushes to `main` build once and publish the export to both the live site and the shared preview site. Pushes to `preview` build and update only the preview site. Other branches do not trigger Cloudflare builds.
 
-The configuration publishes `out/`, preserves directory-index routing, and serves the exported 404 page for missing routes. `.node-version` selects Node.js 24 for the build. Workers Builds supplies deployment authentication automatically.
+The [live site](https://b-parker-interiors.blake-fd0.workers.dev) and [preview site](https://preview-b-parker-interiors.blake-fd0.workers.dev) have fixed URLs. Deploying `main` refreshes the preview site with the `main` version; it does not change the Git `preview` branch. Merge `main` into `preview` when bringing that branch up to date.
+
+The workflow installs dependencies with `npm ci`, builds with `npm run build`, deploys `main` with `npx wrangler deploy`, and updates the shared preview with `npx wrangler preview --name preview`. It uses the repository's `CLOUDFLARE_API_TOKEN` Actions secret for authentication. Cloudflare Workers Builds triggers are disabled to avoid duplicate builds.
+
+The configuration publishes `out/`, preserves directory-index routing, and serves the exported 404 page for missing routes. `.node-version` selects Node.js 24 for the build.
 
 After building, check deployment configuration without publishing using `npx wrangler deploy --dry-run`, or preview Cloudflare's routing locally with `npx wrangler dev`.
 
