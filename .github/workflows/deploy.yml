@@ -21,6 +21,16 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
+      - name: Cache optimized images
+        uses: actions/cache@v6
+        with:
+          path: |
+            public/nextImageExportOptimizer
+            public/images/**/nextImageExportOptimizer
+            public/images/next-image-export-optimizer-hashes.json
+          key: images-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package-lock.json', 'next.config.mjs') }}-${{ hashFiles('assets/images/**', 'app/**', 'constants/image.constants.ts', 'public/data/**', 'public/images/**', '!public/images/**/nextImageExportOptimizer/**', '!public/images/next-image-export-optimizer-hashes.json') }}
+          restore-keys: |
+            images-v1-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('package-lock.json', 'next.config.mjs') }}-
       - run: npm run build
       - name: Deploy to Cloudflare
         env:
