@@ -47,7 +47,9 @@ After building, check deployment configuration without publishing using `npx wra
 
 Source photos and logos live in `assets/images/` and are imported into page components. Use the `next-image-export-optimizer` Image component and a `sizes` value matching the image's displayed width when adding an image.
 
-`npm run build` generates responsive WebP images and blur placeholders, then packages them in `out/nextImageExportOptimizer/`. Browsers select the appropriate width for their viewport and pixel density. Imported originals remain available as fallbacks; the source asset directory is not copied into `out/`. Generated image caches in `public/` are ignored by Git, so subsequent builds can reuse them.
+`npm run build` generates responsive WebP images and blur placeholders, then packages them in `out/nextImageExportOptimizer/`. Browsers select the appropriate width for their viewport and pixel density. Imported originals remain available as fallbacks; the source asset directory is not copied into `out/`.
+
+GitHub Actions caches the generated images and the optimizer's content hashes between builds. Unchanged images are reused; changed or missing images are regenerated. The cache key includes source images, page and image references, `next.config.mjs`, and `package-lock.json`. When a photo or its usage changes, the previous compatible cache is restored so unchanged photos can still be reused. Configuration or dependency changes start a fresh cache. The first build fills the cache; later builds restore it. These generated files remain ignored by Git.
 
 Cinzel and Outfit are downloaded by `next/font` during the build and served locally in the exported site. A fresh build needs network access to Google Fonts; visitors do not.
 
